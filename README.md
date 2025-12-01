@@ -27,3 +27,13 @@ Lorem Ipsum : 252778f95c0fdad122def4bbca4eacf39cb0afc8
 ### 1.4 / Aujourd'hui, il est facile de creer 2 fichiers différent qui seront hasher de la meme facon par SHA-1 ou MD5. Pour la protetion de mot de passe on utilisera alors SHA-2 SHA-3 ou d'autrse fonctions tel que Argon2.
 
 ### 1.5 / Le but de sel est d'ajouter une valeur aléatoire au mot de passe avant de la hasher. Cela permet de nulifier les tables de hashage précalculé et de rendre impossible l'identification de 2 utilisateurs ayant le meme mot de passe 
+
+## Exercice 3 : Cryptanalyse du chiffre de Vigenère
+
+### 3.1 / Pour un intervalle de 7, voici les IC correspondant : 
+
+- 0.06491,  0.07298,  0.09579,  0.06947,  0.07404,  0.06316,  0.08386
+
+### 3.3 / On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
+
+### 3.4 / 
