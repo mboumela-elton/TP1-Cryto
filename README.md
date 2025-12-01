@@ -3,18 +3,18 @@
 ## Exercice 1 : Découverte des fonctions de hachage (MD5 et  SHA-1)
 
 MD5 :
-ENSEA | 0a5b32abdb2aaabb9f01d2b7d529aa3a
-eNSEA | 4725a60b2ce918046777d8dab211bd1a
-eNSeA | 848d38ed7319d081b15910d8875522f8
-EN5EA | 04ea3dc371590d20ee2870c845f76fb9
+- ENSEA | 0a5b32abdb2aaabb9f01d2b7d529aa3a
+- eNSEA | 4725a60b2ce918046777d8dab211bd1a
+- eNSeA | 848d38ed7319d081b15910d8875522f8
+- EN5EA | 04ea3dc371590d20ee2870c845f76fb9
 
 Lorem Ipsum : 00a0b62f6d780b2f751bef0bef712f8c
 
 SHA-1 : 
-ENSEA | e0ccd5c03e1357c13eaa4f6236ea8cd7bfcee8da
-eNSEA | 3ec865b950694e14bf5a53754be2c3ec5bdb961e
-eNSeA | e75fe77bd5ac51bd29e8645de8f9dd857b894c8c
-EN5EA | 54ed4ee67fd5916f4709b2c28327deb9eec397ea
+- ENSEA | e0ccd5c03e1357c13eaa4f6236ea8cd7bfcee8da
+- eNSEA | 3ec865b950694e14bf5a53754be2c3ec5bdb961e
+- eNSeA | e75fe77bd5ac51bd29e8645de8f9dd857b894c8c
+- EN5EA | 54ed4ee67fd5916f4709b2c28327deb9eec397ea
 
 Lorem Ipsum : 252778f95c0fdad122def4bbca4eacf39cb0afc8
 
