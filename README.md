@@ -30,10 +30,32 @@ Lorem Ipsum : 252778f95c0fdad122def4bbca4eacf39cb0afc8
 
 ## Exercice 3 : Cryptanalyse du chiffre de Vigenère
 
-### 3.1 / Pour un intervalle de 7, voici les IC correspondant : 
+### 3.1 / 
+Pour un intervalle de 7, voici les IC correspondant : 
 
 - 0.06491,  0.07298,  0.09579,  0.06947,  0.07404,  0.06316,  0.08386
 
-### 3.3 / On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
+### 3.3 / 
+On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
 
 ### 3.4 / 
+A l'aide du code vigenere.py on obtient les graphique présent dans le dossier output.
+
+A partir de ses graphes on obtient le décalage et donc la clef suivante : 
+
+- ENSEAIS ! 
+
+### 3.5 / 
+L’indice de coïncidence est efficace pour attaquer le chiffre de Vigenère car il aide à deviner la longueur de la clé en mesurant la probabilité que deux lettres aléatoires soient identiques. En divisant le texte chiffré selon cette longueur, on obtient des sous-textes ressemblant à des chiffres de César avec un indice de coïncidence caractéristique, ce qui facilite la détection des décalages et donc la clé. Cette méthode permet ainsi de casser le chiffre en exploitant les régularités statistiques des langues naturelles.​
+
+### 3.6 / 
+A l'aide du code kasiski.py, on obtient 53 occurences avec un longueur de 7. Plus le texte est long plus il sera precis. 
+
+### 3.7 / 
+La clef One-Time Pad est a usage unique. elle doit faire la taille du message pour assurer la confidentialité du message 
+
+### 3.8 /
+Cependant il ne faut pas la réutiliser. Au quel cas, on peut ajouter les différents messages et ré-appliquer les méthodes précédentes pour retrouver la clef.
+
+### 3.9 /
+Par conséquence, non il ne faut pas réutilisé la meme clef.
