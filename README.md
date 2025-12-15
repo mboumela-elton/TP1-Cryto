@@ -1,5 +1,67 @@
 # TP - Crypto
 
+## Exercice 1 : Découverte des fonctions de hachage (MD5 et  SHA-1)
+
+MD5 :
+- ENSEA | 0a5b32abdb2aaabb9f01d2b7d529aa3a
+- eNSEA | 4725a60b2ce918046777d8dab211bd1a
+- eNSeA | 848d38ed7319d081b15910d8875522f8
+- EN5EA | 04ea3dc371590d20ee2870c845f76fb9
+
+Lorem Ipsum : 00a0b62f6d780b2f751bef0bef712f8c
+
+SHA-1 : 
+- ENSEA | e0ccd5c03e1357c13eaa4f6236ea8cd7bfcee8da
+- eNSEA | 3ec865b950694e14bf5a53754be2c3ec5bdb961e
+- eNSeA | e75fe77bd5ac51bd29e8645de8f9dd857b894c8c
+- EN5EA | 54ed4ee67fd5916f4709b2c28327deb9eec397ea
+
+Lorem Ipsum : 252778f95c0fdad122def4bbca4eacf39cb0afc8
+
+### 1.1 / Chaque modification entraine la génération d'un Hash différent : l'effet avalanche est vérifié
+
+### 1.2 / On obtient un Hash de meme longueur. La résistance aux collision semble compromise.
+
+### 1.3 / Pour SHA-1, on remarque que la modification de la fin du message ne modifie pas le Hash. Cela s'explique par la segmentation par bloc pour le hashage. En revanche pour MD5, j ne rencontre pas ce probleme. C'est l'effet avalanche. La résistance à la Seconde Préimage semble compromise.
+
+### 1.4 / Aujourd'hui, il est facile de creer 2 fichiers différent qui seront hasher de la meme facon par SHA-1 ou MD5. Pour la protetion de mot de passe on utilisera alors SHA-2 SHA-3 ou d'autrse fonctions tel que Argon2.
+
+### 1.5 / Le but de sel est d'ajouter une valeur aléatoire au mot de passe avant de la hasher. Cela permet de nulifier les tables de hashage précalculé et de rendre impossible l'identification de 2 utilisateurs ayant le meme mot de passe 
+
+## Exercice 3 : Cryptanalyse du chiffre de Vigenère
+
+### 3.1 / 
+Pour un intervalle de 7, voici les IC correspondant : 
+
+- 0.06491,  0.07298,  0.09579,  0.06947,  0.07404,  0.06316,  0.08386
+
+### 3.3 / 
+On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
+
+### 3.4 / 
+A l'aide du code vigenere.py on obtient les graphique présent dans le dossier output.
+
+A partir de ses graphes on obtient le décalage et donc la clef suivante : 
+
+- ENSEAIS ! 
+
+### 3.5 / 
+L’indice de coïncidence est efficace pour attaquer le chiffre de Vigenère car il aide à deviner la longueur de la clé en mesurant la probabilité que deux lettres aléatoires soient identiques. En divisant le texte chiffré selon cette longueur, on obtient des sous-textes ressemblant à des chiffres de César avec un indice de coïncidence caractéristique, ce qui facilite la détection des décalages et donc la clé. Cette méthode permet ainsi de casser le chiffre en exploitant les régularités statistiques des langues naturelles.​
+
+### 3.6 / 
+A l'aide du code kasiski.py, on obtient 53 occurences avec un longueur de 7. Plus le texte est long plus il sera precis. 
+
+### 3.7 / 
+La clef One-Time Pad est a usage unique. elle doit faire la taille du message pour assurer la confidentialité du message 
+
+### 3.8 /
+Cependant il ne faut pas la réutiliser. Au quel cas, on peut ajouter les différents messages et ré-appliquer les méthodes précédentes pour retrouver la clef.
+
+### 3.9 /
+Par conséquence, non il ne faut pas réutilisé la meme clef.
+
+# TP - Crypto
+
 ## Exercice 2
 J'ai fait mes observations sur l'intranet de l'ensea :
 - Nom du sujet
@@ -130,9 +192,9 @@ La difficulté est un paramètre qui détermine à quel point il est difficile d
 
 Le total maximum de bitcoins est de 21,000,000 BTC, ce qui découle d'une série géométrique. La première récompense est de 50 BTC par bloc. La formule de la somme infinie de cette série est :
 
-\[
+$$
 50 \times 210\,000 \times \sum_{n=0}^{\infty} \left( \frac{1}{2} \right)^n = 50 \times 210\,000 \times 2 = 21\,000\,000
-\]
+$$
 
 Je vais présenter les réponses sous forme numérotée avec des labels en gras pour plus de clarté.
 ## Récompenses et halving de Bitcoin
@@ -158,62 +220,103 @@ Je vais présenter les réponses sous forme numérotée avec des labels en gras 
 10. **Année approximative du dernier bitcoin miné (4.20):** Vers 2140.
 
 11. **Nombre total maximum de bitcoins (4.21):** 21 000 000 BTC.
-## Exercice 1 : Découverte des fonctions de hachage (MD5 et  SHA-1)
 
-MD5 :
-- ENSEA | 0a5b32abdb2aaabb9f01d2b7d529aa3a
-- eNSEA | 4725a60b2ce918046777d8dab211bd1a
-- eNSeA | 848d38ed7319d081b15910d8875522f8
-- EN5EA | 04ea3dc371590d20ee2870c845f76fb9
+### Garanties temporelles et consensus
 
-Lorem Ipsum : 00a0b62f6d780b2f751bef0bef712f8c
+**Question 4.22 :**  
+- **10 minutes** est la cible moyenne.  
 
-SHA-1 : 
-- ENSEA | e0ccd5c03e1357c13eaa4f6236ea8cd7bfcee8da
-- eNSEA | 3ec865b950694e14bf5a53754be2c3ec5bdb961e
-- eNSeA | e75fe77bd5ac51bd29e8645de8f9dd857b894c8c
-- EN5EA | 54ed4ee67fd5916f4709b2c28327deb9eec397ea
+**Question 4.23 :**  
+- Grâce au **réajustement de la difficulté** : si les blocs sont trouvés trop vite, la difficulté augmente ; trop lentement, elle diminue.  
 
-Lorem Ipsum : 252778f95c0fdad122def4bbca4eacf39cb0afc8
+**Question 4.24 :**  
+- Tous les **2016 blocs**, soit environ toutes les **2 semaines**.  
 
-### 1.1 / Chaque modification entraine la génération d'un Hash différent : l'effet avalanche est vérifié
+**Question 4.25 :**  
+- Les blocs seraient trouvés deux fois plus vite (≈5 min) jusqu’au prochain ajustement, où la difficulté serait doublée pour revenir à 10 min.  
 
-### 1.2 / On obtient un Hash de meme longueur. La résistance aux collision semble compromise.
+**Question 4.26 :**  
+- Chaque zéro supplémentaire dans le hash valide correspond à une difficulté multipliée par **16** (car chaque hexadécimal représente 4 bits).  
 
-### 1.3 / Pour SHA-1, on remarque que la modification de la fin du message ne modifie pas le Hash. Cela s'explique par la segmentation par bloc pour le hashage. En revanche pour MD5, j ne rencontre pas ce probleme. C'est l'effet avalanche. La résistance à la Seconde Préimage semble compromise.
+**Question 4.27 :**  
+- Pour réduire le risque de **réorganisation de la chaîne** : une transaction dans un bloc récent peut être annulée si une autre chaîne concurrente devient plus longue.  
 
-### 1.4 / Aujourd'hui, il est facile de creer 2 fichiers différent qui seront hasher de la meme facon par SHA-1 ou MD5. Pour la protetion de mot de passe on utilisera alors SHA-2 SHA-3 ou d'autrse fonctions tel que Argon2.
+**Question 4.28 :**  
+- Généralement **6 confirmations** (≈1 heure) sont considérées comme sûres pour des montants élevés.  
 
-### 1.5 / Le but de sel est d'ajouter une valeur aléatoire au mot de passe avant de la hasher. Cela permet de nulifier les tables de hashage précalculé et de rendre impossible l'identification de 2 utilisateurs ayant le meme mot de passe 
+**Question 4.29 :**  
+- C’est lorsqu’un acteur contrôle **plus de 50% de la puissance de calcul**.  
+- Il peut alors réorganiser la blockchain, annuler ou modifier des transactions, et menacer la confiance dans le réseau.
 
-## Exercice 3 : Cryptanalyse du chiffre de Vigenère
+## 4.4.6 Aspects cryptographiques
 
-### 3.1 / 
-Pour un intervalle de 7, voici les IC correspondant : 
+**Question 4.30 :**  
+- Bitcoin utilise **SHA-256** (Secure Hash Algorithm 256 bits).  
+- En fait, le minage applique **double SHA-256** : le hash est calculé deux fois pour renforcer la sécurité.  
 
-- 0.06491,  0.07298,  0.09579,  0.06947,  0.07404,  0.06316,  0.08386
+**Question 4.31 :**  
+- La sortie de SHA-256 est de **256 bits**, soit **64 caractères hexadécimaux**.  
 
-### 3.3 / 
-On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
+**Question 4.32 :**  
+- Le hash est calculé uniquement sur **l’en-tête du bloc** (block header), qui contient : version, hash du bloc précédent, Merkle root, horodatage, bits (cible de difficulté), et nonce.  
 
-### 3.4 / 
-A l'aide du code vigenere.py on obtient les graphique présent dans le dossier output.
+**Question 4.33 :**  
+- Ils apparaissent comme des chaînes hexadécimales de 64 caractères.  
+- Leur distribution semble aléatoire (pas de motifs visibles), mais beaucoup commencent par plusieurs zéros à cause de la difficulté imposée.  
 
-A partir de ses graphes on obtient le décalage et donc la clef suivante : 
+**Question 4.34 :**  
+- Les mineurs doivent trouver un **nonce** tel que le hash du bloc soit inférieur à une **cible de difficulté**.  
+- Cela demande d’essayer énormément de valeurs de nonce jusqu’à ce que le hash respecte la condition.  
 
-- ENSEAIS ! 
+**Question 4.35 :**  
+$$
+\text{SHA256(SHA256(BlockHeader))} < \text{Target}
+$$  
+où *Target* est la valeur de difficulté définie par le protocole.  
 
-### 3.5 / 
-L’indice de coïncidence est efficace pour attaquer le chiffre de Vigenère car il aide à deviner la longueur de la clé en mesurant la probabilité que deux lettres aléatoires soient identiques. En divisant le texte chiffré selon cette longueur, on obtient des sous-textes ressemblant à des chiffres de César avec un indice de coïncidence caractéristique, ce qui facilite la détection des décalages et donc la clé. Cette méthode permet ainsi de casser le chiffre en exploitant les régularités statistiques des langues naturelles.​
+**Question 4.36 :**  
+- La difficulté actuelle (fin 2025) est d’environ **85 T (85 trillions)**.  
+- Cela signifie qu’en moyenne, un mineur doit calculer environ $$ 8,5 \times 10^{13} $$ hashs pour trouver un bloc valide.  
+- En pratique, c’est une valeur moyenne : certains blocs sont trouvés plus vite, d’autres plus lentement, mais sur le long terme cela converge vers 10 minutes par bloc.  
 
-### 3.6 / 
-A l'aide du code kasiski.py, on obtient 53 occurences avec un longueur de 7. Plus le texte est long plus il sera precis. 
+## 4.4.6 Analyse pratique
 
-### 3.7 / 
-La clef One-Time Pad est a usage unique. elle doit faire la taille du message pour assurer la confidentialité du message 
+- ce block a été miné par un mineur solo sur la plateforme le 11/12/2025 ce qui le rend donc exceptionnel, ce fait rare est survenu sur la plateforme de minage solo appelé SoloCK.
 
-### 3.8 /
-Cependant il ne faut pas la réutiliser. Au quel cas, on peut ajouter les différents messages et ré-appliquer les méthodes précédentes pour retrouver la clef.
+![alt text](output/block-btc.png)
 
-### 3.9 /
-Par conséquence, non il ne faut pas réutilisé la meme clef.
+## 4.4.6 Résumé rapide 
+
+### Question 4.37 : Immutabilité des transactions
+- Chaque bloc contient le **hash du bloc précédent**.  
+- Modifier une transaction impliquerait de recalculer tous les blocs suivants, ce qui est **pratiquement impossible** à cause de la puissance de calcul requise.  
+- Ce chaînage rend les transactions passées immuables.  
+
+### Question 4.38 : Décentralisation et acteurs
+- Bitcoin est décentralisé car il n’existe **aucune autorité centrale**.  
+- Les acteurs sont :  
+  - **Mineurs** (sécurisent le réseau via la preuve de travail).  
+  - **Nœuds complets** (valident et propagent les transactions).  
+  - **Utilisateurs** (envoient et reçoivent des bitcoins).  
+- Le consensus est atteint collectivement.  
+
+### Question 4.39 : Débit maximum théorique
+- Le débit théorique de Bitcoin est limité par la taille des blocs (1 Mo) et leur fréquence (10 min).  
+- Cela donne environ **3,3 à 7 transactions par seconde**.  
+- En comparaison, **Visa peut traiter jusqu’à 65 000 TPS**.  
+- Conclusion : Bitcoin est beaucoup plus lent que les systèmes de paiement traditionnels, ce qui explique les recherches sur des solutions de **scalabilité** (Lightning Network, SegWit).  
+
+### Question 4.40 : Implications environnementales
+- La preuve de travail consomme énormément d’énergie car elle nécessite des calculs intensifs.  
+- Impact : **forte empreinte carbone**, dépendance aux énergies fossiles dans certains pays.  
+- Alternatives proposées :  
+  - **Proof of Stake (PoS)** : sélection des validateurs en fonction de leur mise en jeu (staking).  
+  - **Proof of Authority (PoA)** ou autres mécanismes moins énergivores.  
+- Ces alternatives réduisent la consommation énergétique mais posent des questions de sécurité et de centralisation.  
+
+### Question 4.41 : Évolution du hashrate sur 6 mois
+- Le hashrate est passé d’environ **850 EH/s en juin 2025** à plus de **1100 EH/s en décembre 2025**.  
+- Cela montre :  
+  - Une **croissance continue** de la puissance de calcul.  
+  - Une **sécurité accrue** du réseau (plus difficile à attaquer).  
+  - Un intérêt économique fort pour le minage malgré la baisse des récompenses (3,125 BTC).  
