@@ -217,3 +217,105 @@ Cependant il ne faut pas la réutiliser. Au quel cas, on peut ajouter les diffé
 
 ### 3.9 /
 Par conséquence, non il ne faut pas réutilisé la meme clef.
+
+## Exercice 5 : Analyse forensique d’une extension Chrome pour les crypto-actifs
+
+### 5.1
+
+### 5.2
+
+### 5.3 
+L'algorythme utilisé est AES
+(https://github.com/MetaMask/browser-passworder/blob/main/src/index.ts)
+
+### 5.4
+
+#### 1. AES-CBC
+Comment ça marche : Divise les données en blocs et chiffre chaque bloc en se basant sur le précédent.
+
+Problème : Si un bloc est corrompu, tout le reste l’est aussi. Il ne vérifie pas si les données ont été modifiées.
+
+#### 2. AES-GCM
+
+Comment ça marche : Chiffre les données par un compteur, puis vérifie leur intégrité en même temps (en s'assurant qu'elles n'ont pas été modifiées).
+
+Avantage : C’est rapide et sécurisé. Il garantit à la fois que les données restent confidentielles et intactes.
+
+#### 3. AES-CTR
+
+Comment ça marche : Chiffre les données avec un compteur unique qui change à chaque bloc.
+
+Avantage : Très rapide, mais ne vérifie pas si les données ont été modifiées.
+
+#### MetaMask ! 
+
+Metamask utilise AES-GCM pour des raisons de rapidité et de securité. 
+
+### 5.5 
+
+```ts
+export async function decrypt(
+  password: string,
+  text: string,
+  encryptionKey?: EncryptionKey | CryptoKey,
+): Promise<unknown> {
+  const payload = JSON.parse(text);
+  const { salt, keyMetadata } = payload;
+  const cryptoKey = unwrapKey(
+    encryptionKey ||
+      (await keyFromPassword(password, salt, false, keyMetadata)),
+  );
+
+  const result = await decryptWithKey(cryptoKey, payload);
+  return result;
+}
+
+export async function decryptWithKey<R>(
+  encryptionKey: EncryptionKey | CryptoKey,
+  payload: EncryptionResult,
+): Promise<R> {
+  const encryptedData = Buffer.from(payload.data, 'base64');
+  const vector = Buffer.from(payload.iv, 'base64');
+  const key = unwrapKey(encryptionKey);
+
+  let decryptedObj;
+  try {
+    const result = await crypto.subtle.decrypt(
+      { name: DERIVED_KEY_FORMAT, iv: vector },
+      key,
+      encryptedData,
+    );
+
+    const decryptedData = new Uint8Array(result);
+    const decryptedStr = Buffer.from(decryptedData).toString(STRING_ENCODING);
+    decryptedObj = JSON.parse(decryptedStr);
+  } catch (e) {
+    throw new Error('Incorrect password');
+  }
+
+  return decryptedObj;
+}
+```
+
+#### Entrées necessaires
+
+- Password
+- Text chiffré
+
+#### Etapes de dérivation de clé
+- la clé est obte
+- nue par un transformation du password avec le selt et les metadata
+
+#### Sortie obtenues
+
+- text décrypté
+
+### 5.6 
+
+La multiplication du nombre d'itération permet d'alonger le temps de calcul pour rendre impossible de brut force ou l'utilisation de RainbowTable
+### 5.7
+
+L'ajout du sel permet à 2 utilisateur d'avoir le meme password sans quand les hashages soit identique
+
+### 5.8
+
