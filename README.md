@@ -28,40 +28,6 @@ Lorem Ipsum : 252778f95c0fdad122def4bbca4eacf39cb0afc8
 
 ### 1.5 / Le but de sel est d'ajouter une valeur aléatoire au mot de passe avant de la hasher. Cela permet de nulifier les tables de hashage précalculé et de rendre impossible l'identification de 2 utilisateurs ayant le meme mot de passe 
 
-## Exercice 3 : Cryptanalyse du chiffre de Vigenère
-
-### 3.1 / 
-Pour un intervalle de 7, voici les IC correspondant : 
-
-- 0.06491,  0.07298,  0.09579,  0.06947,  0.07404,  0.06316,  0.08386
-
-### 3.3 / 
-On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
-
-### 3.4 / 
-A l'aide du code vigenere.py on obtient les graphique présent dans le dossier output.
-
-A partir de ses graphes on obtient le décalage et donc la clef suivante : 
-
-- ENSEAIS ! 
-
-### 3.5 / 
-L’indice de coïncidence est efficace pour attaquer le chiffre de Vigenère car il aide à deviner la longueur de la clé en mesurant la probabilité que deux lettres aléatoires soient identiques. En divisant le texte chiffré selon cette longueur, on obtient des sous-textes ressemblant à des chiffres de César avec un indice de coïncidence caractéristique, ce qui facilite la détection des décalages et donc la clé. Cette méthode permet ainsi de casser le chiffre en exploitant les régularités statistiques des langues naturelles.​
-
-### 3.6 / 
-A l'aide du code kasiski.py, on obtient 53 occurences avec un longueur de 7. Plus le texte est long plus il sera precis. 
-
-### 3.7 / 
-La clef One-Time Pad est a usage unique. elle doit faire la taille du message pour assurer la confidentialité du message 
-
-### 3.8 /
-Cependant il ne faut pas la réutiliser. Au quel cas, on peut ajouter les différents messages et ré-appliquer les méthodes précédentes pour retrouver la clef.
-
-### 3.9 /
-Par conséquence, non il ne faut pas réutilisé la meme clef.
-
-# TP - Crypto
-
 ## Exercice 2
 J'ai fait mes observations sur l'intranet de l'ensea :
 - Nom du sujet
@@ -123,6 +89,38 @@ Pour vérifier la révocation d'un certificat, deux méthodes sont couramment ut
     et il y a des ID comme Subject Key ID, Authority Key ID.
 
 - comme son nom l'indique, un certificat auto signé est un certificat de clé publique qu'un utilisateur émet en son propre nom, par opposition à un certificat émis par une autorité de certification. Un tel certificat est facile à produire et ne coûte rien. Cependant, il ne fournit aucune valeur de confiance.
+
+## Exercice 3 : Cryptanalyse du chiffre de Vigenère
+
+### 3.1 / 
+Pour un intervalle de 7, voici les IC correspondant : 
+
+- 0.06491,  0.07298,  0.09579,  0.06947,  0.07404,  0.06316,  0.08386
+
+### 3.3 / 
+On retrouve que 5 mod(7) donne un IC de 0.7404 proche de celui du francais. On en conclu donc que la chaine semble etre de longueur 7. 
+
+### 3.4 / 
+A l'aide du code vigenere.py on obtient les graphique présent dans le dossier output.
+
+A partir de ses graphes on obtient le décalage et donc la clef suivante : 
+
+- ENSEAIS ! 
+
+### 3.5 / 
+L’indice de coïncidence est efficace pour attaquer le chiffre de Vigenère car il aide à deviner la longueur de la clé en mesurant la probabilité que deux lettres aléatoires soient identiques. En divisant le texte chiffré selon cette longueur, on obtient des sous-textes ressemblant à des chiffres de César avec un indice de coïncidence caractéristique, ce qui facilite la détection des décalages et donc la clé. Cette méthode permet ainsi de casser le chiffre en exploitant les régularités statistiques des langues naturelles.​
+
+### 3.6 / 
+A l'aide du code kasiski.py, on obtient 53 occurences avec un longueur de 7. Plus le texte est long plus il sera precis. 
+
+### 3.7 / 
+La clef One-Time Pad est a usage unique. elle doit faire la taille du message pour assurer la confidentialité du message 
+
+### 3.8 /
+Cependant il ne faut pas la réutiliser. Au quel cas, on peut ajouter les différents messages et ré-appliquer les méthodes précédentes pour retrouver la clef.
+
+### 3.9 /
+Par conséquence, non il ne faut pas réutilisé la meme clef.
 
 ## Exercice 4
 
@@ -283,7 +281,8 @@ où *Target* est la valeur de difficulté définie par le protocole.
 
 - ce block a été miné par un mineur solo sur la plateforme le 11/12/2025 ce qui le rend donc exceptionnel, ce fait rare est survenu sur la plateforme de minage solo appelé SoloCK.
 
-![alt text](output/block-btc.png)
+![alt text](output/block-btc.png
+
 
 ## 4.4.6 Résumé rapide 
 
@@ -319,4 +318,105 @@ où *Target* est la valeur de difficulté définie par le protocole.
 - Cela montre :  
   - Une **croissance continue** de la puissance de calcul.  
   - Une **sécurité accrue** du réseau (plus difficile à attaquer).  
-  - Un intérêt économique fort pour le minage malgré la baisse des récompenses (3,125 BTC).  
+  - Un intérêt économique fort pour le minage malgré la baisse des récompenses (3,125 BTC).
+
+## Exercice 5 : Analyse forensique d’une extension Chrome pour les crypto-actifs
+
+### 5.1
+
+### 5.2
+
+### 5.3 
+L'algorythme utilisé est AES
+(https://github.com/MetaMask/browser-passworder/blob/main/src/index.ts)
+
+### 5.4
+
+#### 1. AES-CBC
+Comment ça marche : Divise les données en blocs et chiffre chaque bloc en se basant sur le précédent.
+
+Problème : Si un bloc est corrompu, tout le reste l’est aussi. Il ne vérifie pas si les données ont été modifiées.
+
+#### 2. AES-GCM
+
+Comment ça marche : Chiffre les données par un compteur, puis vérifie leur intégrité en même temps (en s'assurant qu'elles n'ont pas été modifiées).
+
+Avantage : C’est rapide et sécurisé. Il garantit à la fois que les données restent confidentielles et intactes.
+
+#### 3. AES-CTR
+
+Comment ça marche : Chiffre les données avec un compteur unique qui change à chaque bloc.
+
+Avantage : Très rapide, mais ne vérifie pas si les données ont été modifiées.
+
+#### MetaMask ! 
+
+Metamask utilise AES-GCM pour des raisons de rapidité et de securité. 
+
+### 5.5 
+
+```ts
+export async function decrypt(
+  password: string,
+  text: string,
+  encryptionKey?: EncryptionKey | CryptoKey,
+): Promise<unknown> {
+  const payload = JSON.parse(text);
+  const { salt, keyMetadata } = payload;
+  const cryptoKey = unwrapKey(
+    encryptionKey ||
+      (await keyFromPassword(password, salt, false, keyMetadata)),
+  );
+
+  const result = await decryptWithKey(cryptoKey, payload);
+  return result;
+}
+
+export async function decryptWithKey<R>(
+  encryptionKey: EncryptionKey | CryptoKey,
+  payload: EncryptionResult,
+): Promise<R> {
+  const encryptedData = Buffer.from(payload.data, 'base64');
+  const vector = Buffer.from(payload.iv, 'base64');
+  const key = unwrapKey(encryptionKey);
+
+  let decryptedObj;
+  try {
+    const result = await crypto.subtle.decrypt(
+      { name: DERIVED_KEY_FORMAT, iv: vector },
+      key,
+      encryptedData,
+    );
+
+    const decryptedData = new Uint8Array(result);
+    const decryptedStr = Buffer.from(decryptedData).toString(STRING_ENCODING);
+    decryptedObj = JSON.parse(decryptedStr);
+  } catch (e) {
+    throw new Error('Incorrect password');
+  }
+
+  return decryptedObj;
+}
+```
+
+#### Entrées necessaires
+
+- Password
+- Text chiffré
+
+#### Etapes de dérivation de clé
+- la clé est obte
+- nue par un transformation du password avec le selt et les metadata
+
+#### Sortie obtenues
+
+- text décrypté
+
+### 5.6 
+
+La multiplication du nombre d'itération permet d'alonger le temps de calcul pour rendre impossible de brut force ou l'utilisation de RainbowTable
+### 5.7
+
+L'ajout du sel permet à 2 utilisateur d'avoir le meme password sans quand les hashages soit identique
+
+### 5.8 
