@@ -420,3 +420,63 @@ La multiplication du nombre d'itération permet d'alonger le temps de calcul pou
 L'ajout du sel permet à 2 utilisateur d'avoir le meme password sans quand les hashages soit identique
 
 ### 5.8 
+```py
+from Cryptodome.Protocol.KDF import PBKDF2
+from Cryptodome.Hash import SHA256
+import base64
+
+password = "123PetitsChats"
+salt_base64 = "JR53k2vFWO11bPrXZLcCYEE01fxSQhTy/8oWaco0bIs="
+
+salt = base64.b64decode(salt_base64)
+
+key = PBKDF2(
+    password=password.encode(),
+    salt=salt,
+    dkLen=32,  # 256 bits = 32 bytes
+    count=600000,  # iterations
+    hmac_hash_module=SHA256
+)
+
+print(f"Password: {password}")
+print(f"Salt (Base64): {salt_base64}")
+print(f"Salt (hex): {salt.hex()}")
+print(f"Derived Key (hex): {key.hex()}")
+print(f"Derived Key (Base64): {base64.b64encode(key).decode()}")
+```
+### 5.9
+
+Le standard BIP39 définit un moyen de convertir une clé cryptographique aléatoire en une phrase mnémonique composée de mots, permettant de sauvegarder et de restaurer facilement un portefeuille.
+
+- Entropie : Générer une séquence aléatoire de bits (128 à 256 bits).
+- Phrase mnémonique : Convertir l’entropie en mots faciles à retenir (12 ou 24 mots).
+- Seed binaire : Transformer la phrase mnémonique en une graine binaire (512 bits) via un algorithme sécurisé (PBKDF2).
+
+Cela permet de sauvegarder et de restaurer un portefeuille cryptographique de manière sécurisée.
+
+### 5.10
+
+Une phrase mnémonique BIP39 peut contenir 12, 18 ou 24 mots, en fonciotn de la taille de la clé. Plus le nombre de mots est élevé, plus la clé est grande, ce qui rend la phrase mnémonique plus difficile à deviner ou à attaquer par force brute
+
+### 5.11
+
+```py
+print("\n=== DÉCHIFFREMENT DES DONNÉES ===")
+print(f"IV (hex): {iv.hex()}")
+print(f"Encrypted data length: {len(ciphertext)} bytes")
+
+print("\n=== DONNÉES DÉCHIFFRÉES ===")
+cipher = AES.new(key, AES.MODE_GCM, iv)
+decrypted_raw = cipher.decrypt(ciphertext)
+print(decrypted_raw)
+```
+
+mnemonic : 
+{110,97,112,107,105,110,32,115,116,97,105,114,115,32,97,108,108,111,119,32,116,114,97,112,32,108,105,103,104,116,32,99,97,117,116,105,111,110,32,115,99,105,115,115,111,114,115,32,99,97,115,104,32,116,121,112,105,99,97,108,32,119,105,110,116,101,114,32,98,101,116,116,101,114,32,99,104,97,105,114}
+
+
+### 5.13
+
+la phrase Mnemonic est :
+
+napkin stairs allow trap light caution scissors cash typical winter better chair
