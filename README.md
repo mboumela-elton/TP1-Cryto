@@ -480,3 +480,13 @@ mnemonic :
 la phrase Mnemonic est :
 
 napkin stairs allow trap light caution scissors cash typical winter better chair
+
+### 5.14
+
+m/44'/60'/0'/0/0
+44 : BIP44
+60 : ethereum
+0 : 1er étage de classification
+0 : 2nd etage de classification
+
+
