@@ -281,7 +281,7 @@ où *Target* est la valeur de difficulté définie par le protocole.
 
 - ce block a été miné par un mineur solo sur la plateforme le 11/12/2025 ce qui le rend donc exceptionnel, ce fait rare est survenu sur la plateforme de minage solo appelé SoloCK.
 
-![alt text](output/block-btc.png
+![alt text](output/block-btc.png)
 
 
 ## 4.4.6 Résumé rapide 
